@@ -1,0 +1,68 @@
+@page {
+    margin-bottom: 50px; /* Espace réservé pour le pied de page */
+}
+
+/* .footer {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+} */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 5px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 0.5px solid #ccc;
+}
+
+th, td {
+    padding: 3px;
+    text-align: left;
+    font-size: 15px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Style pour les lignes impaires */
+tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Style pour les liens */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* Style pour le pied de page */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    bottom: 20px;
+left: 0;
+right: 0;
+
+
+    
+    
+}

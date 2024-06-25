@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexationRepartitionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//routes admin
+
+Route::group([
+    "middleware" => ["auth", "auth.admin"], 
+    "as" => "admin."
+], function(){
+    Route::group([
+        "prefix" => "Indexations", 
+        "as" => "Indexations."
+    ], function(){
+        //pour la connexion des utilisateurs 
+        Route::get("gestionIndexations", [IndexationRepartitionController::class, "index"])->name("gestionIndexation");
+
+        Route::post('soumettre_informations', [IndexationRepartitionController::class, 'store'])->name('soumettre');
+        Route::post('soumettre_Recettes', [IndexationRepartitionController::class, 'ReiseignerRecette'])->name('soumettreRecettes');
+
+        Route::get("lesCommunes", [IndexationRepartitionController::class, "communes"])->name("communes");
+    });
 });
