@@ -5,16 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FichierComptes extends Model
+class NetPercevoirCommune extends Model
 {
     use HasFactory;
     protected $fillable = [
         'annee',
-        'pdf_file',
-        'excel_file',
         'userId',
+        'partFixe',
+        'partVariable',
+        'total',
+        'etat',
+        'tauxRepartition',
+        'totauxCommunes',
+        'totalTrimestriel',  
+        'recetteParCommune', 
     ];
 
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'userId');

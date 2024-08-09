@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate; // Ajout de l'importation de Gate
 use Symfony\Component\HttpFoundation\Response;
 
 class CommuneMiddleware

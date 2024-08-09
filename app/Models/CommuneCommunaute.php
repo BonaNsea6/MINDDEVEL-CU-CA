@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CubCar extends Model
+class CommuneCommunaute extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -28,5 +28,4 @@ class CubCar extends Model
     {
         return $this->belongsTo(User::class, 'carId'); // Relation de carUser avec User (carId comme clé étrangère)
     }
-    
 }

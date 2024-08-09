@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recette_cars', function (Blueprint $table) {
+        Schema::create('configs', function (Blueprint $table) {
             $table->id();
             $table->string('annee');
-            $table->bigInteger('pil');
-            $table->bigInteger('peds');
-            $table->bigInteger('ptc');
-            $table->bigInteger('total');
-            $table->string('etat')->nullable();
+            $table->string('delaie');
+            $table->string('etat');
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recette_cars');
+        Schema::dropIfExists('configs');
     }
 };

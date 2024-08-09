@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FichierComptes extends Model
+class Config extends Model
 {
     use HasFactory;
     protected $fillable = [
         'annee',
-        'pdf_file',
-        'excel_file',
+        'delaie',
         'userId',
+        'etat',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'userId');
-    }
 }

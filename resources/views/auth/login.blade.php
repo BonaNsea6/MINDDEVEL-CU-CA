@@ -6,7 +6,7 @@
     <div class="card-body">
 
         <div class="pt-4 pb-2">
-            <h5 class="card-title text-center pb-0 fs-4">Connecte toi à ton compte</h5>
+            <h5 class="card-title text-center pb-0 fs-4">Connecte vous à votre compte</h5>
             <p class="text-center small">Entres ton Identifiant et ton mot de passe</p>
         </div>
 

@@ -33,15 +33,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define("admin", function(User $user){
-            return $user->hasRole("admin");
-        });
-
-        Gate::define("commune", function(User $user){
-            return $user->hasRole("CUR");
+            return $user->roleId ==1;
         });
 
         Gate::define("car", function(User $user){
-            return $user->hasRole("CAR");
+            return $user->roleId == 3;
+        });
+
+        Gate::define("commune", function(User $user){
+            return $user->roleId ==2;
         });
  
      

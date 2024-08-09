@@ -37,7 +37,8 @@
                         @endif
 
                         <div class="d-flex justify-content-between mb-4 float-right">
-                            <h5 class="card-title"><strong>Indexation/Communes</strong></h5>
+                            <h5 class="card-title"><strong>Indexation/Configurations</strong></h5>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#config"><strong><h5 class="btn btn-success"><span class="bi bi-plus" aria-hidden="true"></span> Configurer </h5></strong></a>
                             <a href=""><strong><h5 class="btn btn-danger">Fermer</h5></strong></a>
                         </div>
                     </div>
@@ -45,34 +46,34 @@
                     <div class="card-body">
                         <!-- Bordered Tabs -->
                         <div class="tab-content pt-2" id="borderedTabContent">
-                            <table class="table table-bordered table-borderless datatable">
-                                <thead style="color:white;">
-                                    <tr style="background-color:gray;">
-                                        <th scope="col" style="text-align:center">N°</th>
-                                        <th scope="col" style="text-align:center">Annéee N-2</th>
-                                        <th scope="col" style="text-align:center">Communes d'arrondissement</th>                   
-                                        <th scope="col" style="text-align:center">Montant Part Fixe</th>
-                                        <th scope="col" style="text-align:center">Montant Part Variable</th>
-                                        <th scope="col" style="text-align:center">Total</th>
-                                        <th scope="col" style="text-align:center">Reste</th>
-                                    </tr>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($netPercevoirData as $commune)
-                                    <tr style="text-align:center;">
-                                        <td scope="row"></td>
-                                        <td scope="row">{{ $commune->annee }}</td>
-                                        <td scope="row">{{ $commune->commune_name }}</td>
-                                        <td scope="row" style="color:green">{{ $commune->partFixe }} XAF</td>
-                                        <td scope="row" style="color:red">{{ $commune->partVariable }} XAF</td>
-                                        <td scope="row" style="color:blue">{{ $commune->total }} XAF</td>
-                                        <td scope="row"></td>
-                                    </tr>
-                                @endforeach
+                        <div class="modal fade" id="config" tabindex="-3" aria-labelledby="modalFormLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalFormLabel">Configurer les déleais de soumissions des comptes administratifs pour  de l'année {{$anneeN2}}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form class="row g-12" method="post" action="{{ route('commune.Indexations.configurerDelaie') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <!-- Place ici ton formulaire -->
+                                        <iframe id="pdfPreview" style="width:100%;height:500px;display:none;"></iframe>
 
-                                </tbody>
-                            </table>
+                                        <div class="mb-3">
+                                            <label for="excel_file" class="form-label">choisir une Date limite de soumission <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" id="excel_file" name="delaie"  required>
+                                        </div>
+                                        <iframe id="excelPreview" style="width:100%;height:500px;display:none;"></iframe>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button class="btn btn-primary" type="submit">Envoyer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                         </div><!-- End Bordered Tabs -->
                     </div>
                 </div>

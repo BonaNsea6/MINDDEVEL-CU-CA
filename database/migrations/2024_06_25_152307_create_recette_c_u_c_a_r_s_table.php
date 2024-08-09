@@ -20,11 +20,12 @@ return new class extends Migration
             $table->bigInteger('rdp');
             $table->bigInteger('rdpc');
             $table->bigInteger('rtps');
-            $table->bigInteger('Total')->nullable();
-            $table->bigInteger('tauxApplique')->nullable();
-            $table->bigInteger('resteCUB')->nullable();
-            $table->bigInteger('partFixe')->nullable();
-            $table->bigInteger('partVariable')->nullable();
+            $table->bigInteger('Total');
+            $table->bigInteger('tauxApplique');
+            $table->bigInteger('resteCUB');
+            $table->bigInteger('partFixe');
+            $table->bigInteger('partVariable');
+            $table->bigInteger('partCommune')->nullable();
             $table->string('explication')->nullable();
             $table->string('etat')->nullable();
             $table->unsignedBigInteger('userId');

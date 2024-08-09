@@ -24,10 +24,15 @@ class RecetteCUCAR extends Model
         'partVariable',
         'explication',
         'etat',
+        'partCommune',
     ];
+
     public function user()
     {
-        return $this->belongsTo(User::class);
-    
+        return $this->belongsTo(User::class, 'userId');
+    }
+    public function communes()
+    {
+        return $this->hasManyThrough(User::class, CubCar::class, 'cubId', 'id', 'userId', 'carId');
     }
 }

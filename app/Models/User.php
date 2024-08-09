@@ -23,6 +23,7 @@ class User extends Authenticatable
         'telephone',
         'boite_postale',
         'password',
+        'roleId',
     ];
 
     /**
@@ -60,4 +61,24 @@ class User extends Authenticatable
     {
         return $this->roles()->whereIn("name", $role)->first() !== null;
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roleId');
+    }
+
+   // Dans le modèle User pour les communes
+    public function communes()
+    {
+        return $this->belongsToMany(User::class, 'commune_communautes', 'cubId', 'carId');
+    }
+
+    // Dans le modèle User, pour une commune
+   // Dans le modèle User pour les communes
+    // Dans le modèle User pour les communautés
+    public function communaute()
+    {
+        return $this->belongsToMany(User::class, 'commune_communautes', 'carId', 'cubId');
+    }
+
+
 }
