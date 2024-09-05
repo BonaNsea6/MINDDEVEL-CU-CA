@@ -18,47 +18,76 @@
       <!-- <link href="style.css" rel="stylesheet"> -->
       <link rel="stylesheet" href="assets/css/pdf-styles.css">
 <!--  -->
-    <style>
-      .header-left, .header-right {
+<style>
+        .header-left, .header-right {
             width: 50%;
             float: left;
             text-align: center;
             font-family: Arial, sans-serif;
         }
+
         @page {
-            margin-top: 3mm; /* Réduit les marges du PDF */
+            margin: 10mm; /* Ajuste les marges pour s'adapter à la page */
         }
+
         .highlight {
-            font-weight: bold; /* Optionnel : mettre en gras */
-            text-decoration: underline; /* Souligne le texte */
+            font-weight: bold;
+            text-decoration: underline;
         }
+
         .montant {
-            font-weight: bold; /* Optionnel : mettre en gras */
+            font-weight: bold;
         }
-      .header-content {
+
+        .header-content {
             margin: 0 auto;
         }
 
-      .h1 {
-          margin: 5px 0;
-          font-size: 10px;
-          font-weight: bold;
-      }
+        .h1, .p {
+            margin: 5px 0;
+        }
 
-      .p {
-          margin: 0;
-          font-size: 10px;
-          font-weight: bold;
-      }
-      .t {
-          margin: 0;
-          font-size: 10px;
-      }
-      body {
-        font-family: Arial, sans-serif;
-            margin: 0; /* Supprime les marges par défaut du body */
-      }
-    </style>
+        .h1 {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .p {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .t {
+            font-size: 10px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: center;
+            vertical-align: middle;
+            font-size : 10px;
+        }
+
+
+        .table-container {
+            overflow-x: auto;
+        }
+
 </head>
 <body>
     <header class="header-left">
@@ -100,24 +129,24 @@
     </div><!-- End Recent Sales -->
 
     <div class="card-body" style="margin-top:20px;">
-        <p class="t" style=" font-size:11px margin-left:10px">VU la constitution;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°92/007 du 14 Aout 1992 portant Code du travail;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2012/001 du 19 Aavril 2012 portant Code Electoral;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style=" font-size:11px margin-left:10px">VU la constitution;</p>
+        <p class="" style="font-size:10px">VU la la loi N°92/007 du 14 Aout 1992 portant Code du travail;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2012/001 du 19 Aavril 2012 portant Code Electoral;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
 
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
-        <p class="t" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
+        <p class="" style="font-size:10px">VU la la loi N°2019/024 du 19 Décembre 2019 portant Code Général des Collectivités Territoriales;</p>
     </div><!-- End Recent Sales -->
 
     <div class="card-body" style="margin-top:20px; ">
@@ -178,7 +207,7 @@
                                             Taux de repartition par Commune
                                         </td>
                                         @foreach($netPercevoirData as $commune)
-                                        <td scope="col" style="text-align:center">{{number_format( $commune->tauxRepartition, 0, ',', '.') }}%</td>
+                                        <td scope="col" style="text-align:center">{{$commune->tauxRepartition }}%</td>
                                         @endforeach
                                         <td scope="row">
                                             100%
@@ -218,6 +247,12 @@
                             </table>
     </div><!-- End Recent Sales -->
   </div><!-- End Recent Sales -->
+
+  <div class="card-body" style="margin-top:20px;">
+           <p class="t" style="font-size:15px; text-align: justify"> <span class="highlight">Article 3</span> : La présente décision sera notifiée aux parties concernées pour strictement application.</p>
+           <p class="t" style="font-size:15px; text-align: justify"> <span class="highlight">Article 4</span> : La décision prend effet à compter de sa date de signature.</p>
+           <p class="t" style="font-size:15px; text-align: justify"> <span class="highlight">Article 5</span> : Toutes dispositions antérieures contraires à la présente décision sont abrogées.</p>
+        </div>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.min.js"></script>

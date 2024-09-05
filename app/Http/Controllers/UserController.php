@@ -12,9 +12,14 @@ use App\Notifications\UserCreated;
 use App\Mail\MailNotify;
 use Illuminate\Database\QueryException;
 use App\Models\User;
+use App\Models\FichierComptes;
 use App\Models\CubCar;
 use App\Models\CommuneCommunaute;
+use App\Models\RecetteCUCAR;
+use App\Models\RecetteCar;
 use App\Models\Role;
+use App\Models\NetPercevoirCommune;
+use Carbon\Carbon;
 use PDF;
 class UserController extends Controller
 {
@@ -29,7 +34,22 @@ class UserController extends Controller
         $user_Id = auth()->id();
         $roles = Role::all();
         $affectedCommuneIds = CommuneCommunaute::pluck('carId')->toArray();
-        return view('utilisateurs.gestionUtilisateurs',['user' => $user, 'userId' => $user_Id], compact('users','roles','affectedCommuneIds'));
+        return view('Admin.gestionUtilisateurs',['user' => $user, 'userId' => $user_Id], compact('users','roles','affectedCommuneIds'));
+    }
+
+    public function communes()
+    {
+        //
+        $users = User::orderBy('id', 'desc')->paginate(10000);
+        $user = auth()->user();
+        $user_Id = auth()->id();
+        $roles = Role::all();
+        $files = FichierComptes::orderBy('userId')->get();
+        $communes = CommuneCommunaute::orderBy('cubId')->get();
+        $recetteCommunautes = RecetteCUCAR::orderBy('userId')->get();
+        $recetteCommune = RecetteCar::orderBy('userId')->get();
+        $netPercevoirData = NetPercevoirCommune::all();
+        return view('Admin.communaute',['user' => $user, 'userId' => $user_Id], compact('users','roles','communes','files','recetteCommunautes','recetteCommune','netPercevoirData'));
     }
 
     /**
@@ -83,8 +103,14 @@ class UserController extends Controller
             if ($e->getCode() === '23000' && strpos($e->getMessage(), 'users_email_unique') !== false) {
                 return redirect()->back()->with('successError', "Désolé! l'adresse email {$request->email} appartient déjà à un autre utilisateur. Veillez utiliser une autre. ");
             }
-            if ($e->getCode() === '23000' && strpos($e->getMessage(), 'users_telephone_unique') !== false) {
-                return redirect()->back()->with('successError', "Désolé! le numero de téléphone {$request->telephone} est déjà utilisé!");
+            if ($e->getCode() === '23000' && strpos($e->getMessage(), 'users_email_unique') !== false) {
+                return redirect()->back()->with('successError', "Désolé! l'adresse email {$request->email} appartient déjà à un autre utilisateur. Veillez utiliser une autre. ");
+            }
+            if ($e->getCode() === '23000' && strpos($e->getMessage(), 'users.users_name_unique') !== false) {
+                return redirect()->back()->with('successError', "Désolé! il le   nom d'utilisateur {$request->name}   existe déja !"); 
+            }
+            if ($e->getCode() === '23000' && strpos($e->getMessage(), 'users.users_boite_postale_unique') !== false) {
+                return redirect()->back()->with('successError', "Désolé! il la boite postale {$request->boite_postale}   existe déja !"); 
             }
             // Gérer les autres types d'erreurs ici si nécessaire
         
@@ -160,7 +186,7 @@ class UserController extends Controller
         // $file->storeAs('photos', $fileName, 'public');
 
         $user->update([
-         '      name' => $request->name,
+                'name' => $request->name,
                 'boite_postale' => $request->boite_postale,
                 'telephone' => $request->telephone,
                 'email' => $request->email,
@@ -185,4 +211,30 @@ class UserController extends Controller
     {
         //
     }
+
+    public function generateCommunePDF(request $request)
+    {
+        $communes = CommuneCommunaute::orderBy('cubId')->get();
+        $pdf = PDF::loadView('Admin.communauteFile', array('communes'=> $communes), compact('communes'))->setPaper('a4','portrait');
+        
+        // Afficher le PDF dans le navigateur
+        return $pdf->stream('communes.pdf');
+     }
+     public function generateRecetteCommunePDF(request $request)
+     {
+         $recetteCommunautes = RecetteCUCAR::orderBy('userId')->get();
+         $pdf = PDF::loadView('Admin.recetteCommunauteFile', array('recetteCommunautes'=> $recetteCommunautes), compact('recetteCommunautes'))->setPaper('a4','landscape');
+         
+         // Afficher le PDF dans le navigateur
+         return $pdf->stream('recetteCommunautes.pdf');
+      }
+
+      public function generateRecetteComPDF(request $request)
+      {
+          $recetteCommunes = RecetteCar::orderBy('userId')->get();
+          $pdf = PDF::loadView('Admin.recetteCommuneFile', array('recetteCommunes'=> $recetteCommunes), compact('recetteCommunes'))->setPaper('a4','landscape');
+          
+          // Afficher le PDF dans le navigateur
+          return $pdf->stream('recetteCommunes.pdf');
+       }
 }

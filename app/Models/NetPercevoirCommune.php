@@ -20,10 +20,10 @@ class NetPercevoirCommune extends Model
         'totalTrimestriel',  
         'recetteParCommune', 
     ];
-
     
     public function user()
     {
         return $this->belongsTo(User::class, 'userId');
     }
+    
 }

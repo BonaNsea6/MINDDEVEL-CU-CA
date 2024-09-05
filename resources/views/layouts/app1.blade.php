@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>MINDDEVEL-SYSGEA</title>
+  <title>MINDDEVEL-DGF</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -52,8 +52,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
     <a href="" class="logo d-flex align-items-center">
-        <img src="" alt="">
-        <span class="d-none d-lg-block" style="text-align:center; font-size:20px;">MINDDEVEL-CUR-CAR</span>
+        <img src="{{ asset('photos/background.jpeg')}}" alt="">
+        <span class="d-none d-lg-block" style="text-align:center; font-size:20px;">MINDDEVEL-DGF</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -223,15 +223,13 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('storage/'.$user->photo) }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2 ellipsis">{{userfullName()}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile ellipsis"  >
             <li class="dropdown-header" >
-              <img src="{{asset('storage/'. $user->photo) }}" alt="Profile" class="rounded-circle" style="height:80px;">
               <h6 class="ellipsis" style=" text-overflow:ellipsis;white-space:nowrap;overflow:hidden;">{{userfullName()}}</h6>
-              <span>{{ getRolesName()}}</span>
+              <span>{{ getRoles()}}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -308,28 +306,34 @@
       </li><!-- End Dashboard Nav -->
 
       @can("commune")
-        <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>communauté Urbaine</span><i class="bi bi-chevron-down ms-auto"></i>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('commune.Indexations.gestionIndexation')}}">
+          <i class="fa fa-cog"></i>
+          <span>Indexation</span>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-         <li>
-            <a href="{{route('commune.Indexations.gestionIndexation')}}">
-              <i class="bi bi-circle"></i><span>Indexation</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{route('commune.Indexations.communes')}}">
-              <i class="bi bi-people-fill"></i><span>Mes communes d'arrodissement</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{route('commune.Indexations.consulterCompteAdministratif')}}">
-              <i class="bi bi-people-fill"></i><span>Consulter les comptes administratifs</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('commune.Indexations.communes')}}">
+          <i class="fa fa-cog"></i>
+          <span>Mes communes d'arrodissement</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('commune.Indexations.consulterCompteAdministratif')}}">
+          <i class="bi bi-file-earmark-pdf-fill"></i>
+          <span>Consulter les comptes administratifs</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('commune.Indexations.configuration')}}">
+          <i class="fa fa-cog"></i>
+          <span>configuration</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+        
     @endcan
 
     @can("car")
@@ -352,20 +356,19 @@
         </ul>
       </li><!-- End Icons Nav -->
       @endcan
-
-      @can("commune")
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('commune.Indexations.configuration')}}">
-          <i class="fa fa-cog"></i>
-          <span>configuration</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-      @endcan
       @can("admin")
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.Indexations.gestionUtilisateurs')}}">
           <i class="fa fa-cog"></i>
           <span>Gestion des utilisateurs</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+      @endcan
+      @can("admin")
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.Indexations.communes')}}">
+          <i class="fa fa-cog"></i>
+          <span>Communautés urbaines</span>
         </a>
       </li><!-- End Profile Page Nav -->
       @endcan

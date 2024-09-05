@@ -218,7 +218,7 @@
                                         <select class="form-select" id="cub" name="comId" required>
                                             <option value=""></option>
                                             @foreach($users as $user)
-                                                @if($user->roleId == 1)
+                                                @if($user->roleId == 2)
                                                 <option value="{{$user->id}}">{{$user->name}}</option>
                                                 @endif
                                             @endforeach

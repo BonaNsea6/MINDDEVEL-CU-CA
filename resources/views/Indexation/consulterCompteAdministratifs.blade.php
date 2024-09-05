@@ -40,7 +40,7 @@
 
                         <div class="d-flex justify-content-between mb-4 float-right">
                             <h5 class="card-title"><strong>Indexation/Consulter les comptes administratifs des communes d'arrondissement</strong></h5>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#config"><strong><h5 class="btn btn-success"><span class="bi bi-plus" aria-hidden="true"></span> Configurer </h5></strong></a>
+                            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#config"><strong><h5 class="btn btn-success"><span class="bi bi-plus" aria-hidden="true"></span> Configurer </h5></strong></a> -->
                             <a href=""><strong><h5 class="btn btn-danger">Fermer</h5></strong></a>
                         </div>
                     </div>

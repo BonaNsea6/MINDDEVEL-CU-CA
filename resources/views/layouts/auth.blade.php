@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>mindsysp</title>
+  <title>MINDDEVEL-DGF</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,7 +28,34 @@
   <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('{{ asset('photos/back.jpg') }}'); /* chemin vers votre image */
+      background-size: cover; /* pour couvrir tout l'écran */
+      background-position: center; /* centrer l'image */
+      background-repeat: no-repeat; /* ne pas répéter l'image */
+      background-attachment: fixed; /* garder l'image fixe lors du défilement */
+      image-rendering: -webkit-optimize-contrast; /* améliorer le rendu de l'image */
+      -ms-interpolation-mode: bicubic; /* pour Internet Explorer */
+      image-rendering: optimizeQuality; /* pour d'autres navigateurs */
+    }
 
+    .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Assure-toi que la vidéo est derrière le contenu */
+}
+video#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajuste la vidéo pour couvrir l'élément sans déformation */
+}
+   
+  </style>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -41,11 +68,24 @@
   ======================================================== -->
 </head>
 
-<body>
+<body style= "background-image: url('{{ asset('photos/backk.jpg') }}'); /* chemin vers votre image */
+      background-size: cover; /* pour couvrir tout l'écran */
+      background-position: center; /* centrer l'image */
+      background-repeat: no-repeat; /* ne pas répéter l'image */
+      background-attachment: fixed; /* garder l'image fixe lors du défilement */
+      image-rendering: -webkit-optimize-contrast; /* améliorer le rendu de l'image */
+      -ms-interpolation-mode: bicubic; /* pour Internet Explorer */
+      image-rendering: optimizeQuality; /* pour d'autres navigateurs */ ">
 
   <main>
     <div class="container">
 
+    <div class="video-background">
+        <video autoplay muted loop id="background-video">
+            <source src="{{ asset('photos/MINDDEVEL-DGF.mp4') }}" type="video/mp4">
+    
+        </video>
+    </div>
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">

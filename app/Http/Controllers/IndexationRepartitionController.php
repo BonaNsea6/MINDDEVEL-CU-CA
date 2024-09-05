@@ -93,7 +93,9 @@ class IndexationRepartitionController extends Controller
         $documents = FichierComptes::all();
         $commune = CommuneCommunaute::where('carId', $user_Id)->first();
         $config = Config::where('annee', $anneeN2)->where('userId', $commune->cubId )->first();
-        return view('Indexation.gestionIndexationCommune',['user' => $user], compact('currentYear','anneeN1','anneeN2','recettes','documents','config'));
+
+        $netPercevoirData = NetPercevoirCommune::all();
+        return view('Indexation.gestionIndexationCommune',['user' => $user], compact('currentYear','anneeN1','anneeN2','recettes','documents','config','netPercevoirData','user_Id'));
     }
 
     public function communes()
@@ -107,7 +109,8 @@ class IndexationRepartitionController extends Controller
         $recettes = RecetteCUCAR::all();
         $documents = FichierComptes::all();
         $communes = CommuneCommunaute::with(['cubUser', 'carUser'])->get();
-
+        $community = User::findOrFail($user_Id);
+        $communeArr = $community->communes;
 
         $netPercevoirData = DB::table('net_percevoir_communes')
         ->join('users', 'net_percevoir_communes.userId', '=', 'users.id')
@@ -127,7 +130,7 @@ class IndexationRepartitionController extends Controller
              'net_percevoir_communes.userId',
         )
         ->get();
-        return view('Indexation.communesArrondissements',['user' => $user], compact('currentYear','anneeN1','anneeN2','recettes','documents','communes','netPercevoirData'));
+        return view('Indexation.communesArrondissements',['user' => $user], compact( 'communeArr','currentYear','anneeN1','anneeN2','recettes','documents','communes','netPercevoirData'));
     }
 
 
@@ -196,11 +199,11 @@ class IndexationRepartitionController extends Controller
             return back()->with('successError', "Vous avez déjà soumis des fichiers pour l'année $anneeN2 .");
         }
         
-        $commune = CommuneCommunaute::where('carId', $user_Id)->first();
-        $config = Config::where('annee', $anneeN2)->where('userId', $commune->cubId )->first();
-        if ($config && Carbon::now()->gt(Carbon::parse($config->delaie))) {
-            return back()->with('successError', 'Le délai de soumission est dépassé. Vous ne pouvez plus soumettre de rapports.');
-        }
+        // $commune = CommuneCommunaute::where('carId', $user_Id)->first();
+        // $config = Config::where('annee', $anneeN2)->where('userId', $commune->cubId )->first();
+        // if ($config && Carbon::now()->gt(Carbon::parse($config->delaie))) {
+        //     return back()->with('successError', 'Le délai de soumission est dépassé. Vous ne pouvez plus soumettre de rapports.');
+        // }
         // Si ce n'est pas le cas, procéder à l'enregistrement des fichiers
         $pdfFile = $request->file('pdf_file');
         $pdfFileName = time() . '_' . $pdfFile->getClientOriginalName();
@@ -268,7 +271,7 @@ class IndexationRepartitionController extends Controller
                 'annee' => $anneeN2,
                 'excel_file' => 'excel/' . $excelFileName,
                 'pdf_file' => 'pdf/' . $pdfFileName,
-                'userId' => auth()->id(), // Assurez-vous d'avoir une colonne `user_id` dans votre table `fichier_comptes`
+                'userId' => auth()->id(), 
             ]);
     
             return back()->with('success', "Documents soumis avec succès!");
@@ -450,16 +453,16 @@ class IndexationRepartitionController extends Controller
             }
 
         
-        if ($documentSoumis ==false) {
-                return back()->with('successError', "Vous ne pouvez pas encore soumettre pour l'année $anneeN2 les reccettes de cette communes car elle n'a pas encore envoyé ses comptes administratifs pour la dite année.");
-            }
+        // if ($documentSoumis ==false) {
+        //         return back()->with('successError', "Vous ne pouvez pas encore soumettre pour l'année $anneeN2 les reccettes de cette communes car elle n'a pas encore envoyé ses comptes administratifs pour la dite année.");
+        //     }
         if ($recetteExistante) {
             return back()->with('successError', "Vous ne pouvez plus soumettre pour l'année $anneeN2. S'il y a des modifications à apporter, veuillez les faire depuis la zone de mise à jour.");
         }
     
         // Calculer le total de l'année N3 si existant
         $totalAnneeN3 = $recetteExistanteAnneeN3 ? RecetteCar::where('annee', $anneeN3)
-            ->where('userId', auth()->id())
+            ->where('userId', $request->userId)
             ->value('totalAnneeN2') : 0;
     
         // Calculer la somme de tous les éléments entiers pour l'année N2

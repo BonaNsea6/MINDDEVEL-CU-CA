@@ -51,9 +51,9 @@ Route::group([
 
         Route::get("consulterCompteAdministratif", [IndexationRepartitionController::class, "consulterCompteAdministratif"])->name("consulterCompteAdministratif");
 
-        Route::get('/rapportsPdf/{commune}/{annee}', [IndexationRepartitionController::class, 'rapportPdf'])->name('rapportPdf');
+        Route::get('/rapport/{commune}/{annee}', [IndexationRepartitionController::class, 'rapportPdf'])->name('rapportPdf');
 
-        Route::get('/rapportsExcel/{commune}/{annee}', [IndexationRepartitionController::class, 'rapportExcel'])->name('rapportExcel');
+        Route::get('/rapportExcel/{commune}/{annee}', [IndexationRepartitionController::class, 'rapportExcel'])->name('rapportExcel');
 
         //gestion des utilisateurs
         Route::get("gestionUtilisateurs", [UserController::class, "index"])->name("gestionUtilisateurs"); 
@@ -66,6 +66,11 @@ Route::group([
 
         //pdf
         Route::post('/viewPdfAdmin{user}/{annee}/{recette}', [IndexationRepartitionController::class, 'generatePDF'])->name('viewPDF');
+        Route::get('/viewPdfCommunes', [UserController::class, 'generateCommunePDF'])->name('viewCommunePDF');
+        Route::get('/viewPdfRecetteCommunes', [UserController::class, 'generateRecetteCommunePDF'])->name('viewRecetteCommunePDF');
+        Route::get('/viewPdfRecetteCom', [UserController::class, 'generateRecetteComPDF'])->name('viewRecetteComPDF');
+        Route::get("communes", [UserController::class, "communes"])->name("communes"); 
+        //gestion des communes
 
     });
 });

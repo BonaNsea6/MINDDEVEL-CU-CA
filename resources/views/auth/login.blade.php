@@ -6,14 +6,14 @@
     <div class="card-body">
 
         <div class="pt-4 pb-2">
-            <h5 class="card-title text-center pb-0 fs-4">Connecte vous à votre compte</h5>
-            <p class="text-center small">Entres ton Identifiant et ton mot de passe</p>
+            <h5 class="card-title text-center pb-0 fs-4">Connectez vous à votre compte</h5>
+            <p class="text-center small">Entrer votre Identifiant et votre mot de passe</p>
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate>
             @csrf
             <div class="col-12">
-                <label for="yourUsername" class="form-label">email</label>
+                <label for="yourUsername" class="form-label">Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend">@</span>
                     <input type="email" name="email"  class="form-control @error('email') is-invalid @enderror" id="yourUsername"  placeholder="Email" value="{{ old('email') }}"  autocomplete="email" autofocus required>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="col-12">
-                <label for="yourPassword" class="form-label">Password </label>
+                <label for="yourPassword" class="form-label">Mot de passe </label>
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                 <div class="invalid-feedback">
                             @error('password')

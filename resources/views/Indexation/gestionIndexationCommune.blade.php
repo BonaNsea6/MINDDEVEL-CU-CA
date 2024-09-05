@@ -43,7 +43,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-4 float-right">
                 
-                            <h5 class="card-title"><strong> vous avez encore jusqu'au {{$config->delaie}} pour envoyer les comptes administratifs de l'année {{$anneeN2}}</strong></h5>
+                            <!-- <h5 class="card-title"><strong> vous avez encore jusqu'au {{$config->delaie}} pour envoyer les comptes administratifs de l'année {{$anneeN2}}</strong></h5> -->
                             
                         </div>
                     </div>
@@ -51,23 +51,34 @@
                     <div class="card-body">
                         <!-- Bordered Tabs -->
                         <div class="tab-content pt-2" id="borderedTabContent">
-                            <table class="table table-bordered table-borderless datatable">
-                                <thead style="color:white;">
-                                    <tr style="background-color:gray;">
-                                        <th scope="col" style="text-align:center">N°</th>
-                                        <th scope="col" style="text-align:center">CAR</th>
-                                        <th scope="col" style="text-align:center">Annéee N-2</th>
-                                        <th scope="col" style="text-align:center">PIL</th>
-                                        <th scope="col" style="text-align:center">PTC</th>
-                                        <th scope="col" style="text-align:center">PEDS</th>
-                                        <th scope="col" style="text-align:center">TOTAL Annéee N-2 </th>
-                                        <th scope="col" style="text-align:center">TOTAL Annéee N-3 </th>
-                                        <th scope="col" style="text-align:center">Difference</th>
-                                        <th scope="col" style="text-align:center">illigibilité aux 30% </th>
-                                        <th scope="col" style="text-align:center">Plus</th>
-                                    </tr>
-                                    </tr>
-                                </thead>
+                                <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Vos recettes</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Net à percevoir</button>
+                                    </li>
+                                </ul>
+
+                        <div class="tab-content pt-2" id="borderedTabContent">
+                            <div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+                                <table class="table table-bordered table-borderless datatable">
+                                    <thead style="color:white;">
+                                        <tr style="background-color:gray;">
+                                            <th scope="col" style="text-align:center">N°</th>
+                                            <th scope="col" style="text-align:center">CAR</th>
+                                            <th scope="col" style="text-align:center">Annéee N-2</th>
+                                            <th scope="col" style="text-align:center">PIL</th>
+                                            <th scope="col" style="text-align:center">PTC</th>
+                                            <th scope="col" style="text-align:center">PEDS</th>
+                                            <th scope="col" style="text-align:center">TOTAL Annéee N-2 </th>
+                                            <th scope="col" style="text-align:center">TOTAL Annéee N-3 </th>
+                                            <th scope="col" style="text-align:center">Difference</th>
+                                            <th scope="col" style="text-align:center">illigibilité aux 30% </th>
+                                            <th scope="col" style="text-align:center">Plus</th>
+                                        </tr>
+                                        </tr>
+                                    </thead>
                                 <tbody>
                                 @foreach($recettes as $recette)
                                 @if($recette->userId === $user->id)
@@ -93,7 +104,41 @@
 
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
 
+                            <table class="table table-bordered table-borderless datatable">
+                            <thead style="color:white;">
+                                <tr style="background-color:gray;">
+                                    <th scope="col" style="text-align:center">N°</th>
+                                    <th scope="col" style="text-align:center">Annéee N-2</th>            
+                                    <th scope="col" style="text-align:center">Montant Part Fixe</th>
+                                    <th scope="col" style="text-align:center">Montant Part Variable</th>
+                                    <th scope="col" style="text-align:center">Total</th>
+                                    <th scope="col" style="text-align:center">Pourcentage </th>
+                                    <th scope="col" style="text-align:center">Montant trimestriel </th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($netPercevoirData as $commune)
+                                @if( $commune->userId === $user_Id )
+                                <tr style="text-align:center;">
+                                    <td scope="row"></td>
+                                    <td scope="row">{{ $commune->annee }}</td>
+                                    <td scope="row" style="color:green"> {{ number_format($commune->partFixe, 0, ',', '.') }} XAF</td>
+                                    <td scope="row" style="color:red">{{number_format( $commune->partVariable, 0, ',', '.') }} XAF</td>
+                                    <td scope="row" style="color:blue">{{ number_format($commune->total, 0, ',', '.') }} XAF</td>
+                                    <td scope="row" style="color:blue">{{ $commune->tauxRepartition }} %</td>
+                                    <td scope="row" style="color:blue">{{ number_format($commune->totalTrimestriel, 0, ',', '.') }} XAF</td>
+                                    <td scope="row"></td>
+                                </tr>
+                                @endif
+                            @endforeach
+
+                            </tbody>
+                            </table>            
+                        </div>
 
 
                              <!-- Modal -->
@@ -178,7 +223,7 @@
                                             }
                                         @endphp
                                         @if($documentSoumis)
-                                    <form class="row g-12" method="post" action="{{ route('admin.Indexations.soumettreRecettesCommune') }}" enctype="multipart/form-data">
+                                    <form class="row g-12" method="post" action="" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <!-- Place ici ton formulaire -->

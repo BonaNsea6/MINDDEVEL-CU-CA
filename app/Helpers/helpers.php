@@ -3,6 +3,9 @@
 function userfullName(){//permet de recuperer les infos sur les users
     return auth()->user()->name;
 }
+function getRoles(){//permet de recuperer les infos sur les users
+  return auth()->user()->role->name;
+}
 
 function getRolesName(){//permet de recuper les info sur le statut
     $rolesName = "";
